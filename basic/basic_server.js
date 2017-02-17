@@ -1,8 +1,10 @@
+const express = require('express');
 const http = require('http');
 
 const port = 3000;
+const app = express();
 
-const requestHandler = (req, res) => {
+app.use((req, res) => {
   console.log(`In comes a request to: ${req.url}`);
   if (req.url === '/') {
     res.end(('Welcome to the homepage.'));
@@ -11,10 +13,8 @@ const requestHandler = (req, res) => {
   } else {
     res.end('Error! File not found.');
   }
-};
+});
 
-const server = http.createServer(requestHandler);
-
-server.listen(port, () => {
+http.createServer(app).listen(port, () => {
   console.log(`Listening on port ${port}...`);
 });
