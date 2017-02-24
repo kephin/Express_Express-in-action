@@ -8,7 +8,7 @@ const app = express();
 const staticPath = path.join(__dirname, 'static');
 app.use(express.static(staticPath));
 
-app.use('.api', apiRouter);
+app.use('/api', apiRouter);
 
 app.listen(3000, () => {
   console.log('Listening on port 3000...');
