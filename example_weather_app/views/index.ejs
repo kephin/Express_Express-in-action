@@ -1,0 +1,17 @@
+<% include header %>
+
+<div id="app">
+	<h1 v-html='heading'></h1>
+	<form class="pure-form" @submit.prevent>
+	  <fieldset>
+	    <input type="text" v-model='place' name="place" placeholder="Place name" autofocus requrired>
+	    <button @click='send' class="pure-button pure-button-primary" :disabled='disableButton'>{{ button }}</button>
+	  </fieldset>
+	</form>
+</div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.10/vue.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.15.3/axios.min.js'></script>
+<script src="/main.js"></script>
+
+<% include footer %>
