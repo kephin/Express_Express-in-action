@@ -12,6 +12,11 @@ app.get('/hello/:who', (req, res) => {
   res.end(`hello, ${req.params.who}`);
 });
 
+// grab query arguements
+app.get('/search', (req, res) => {
+  res.end(`hello, ${req.query.name}`);
+});
+
 // redirect: res.render
 app.post('/users', (req, res) => {
   // save the user info into db
