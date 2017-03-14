@@ -12,7 +12,7 @@ app.get('/hello/:who', (req, res) => {
   res.end(`hello, ${req.params.who}`);
 });
 
-// grab query arguements
+// grab query arguments
 app.get('/search', (req, res) => {
   res.end(`hello, ${req.query.name}`);
 });

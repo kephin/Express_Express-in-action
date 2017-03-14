@@ -7,7 +7,7 @@ const filePath = path.join(__dirname, 'test.jpg');
 
 app.use((req, res, next) => {
   res.sendFile(filePath, err => {
-    //enter error mode by calling next() with an arguement
+    //enter error mode by calling next() with an argument
     if (err) return next(new Error(err));
     console.log('File sent!');
   });
