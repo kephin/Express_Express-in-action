@@ -10,6 +10,15 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
   res.render('index', {
     message: 'Hey, this is my website!',
+    userList: [{
+      profilePicture: 'localPath',
+      name: 'kevin',
+      bio: 'I love JS',
+    }, {
+      profilePicture: 'localPath',
+      name: 'gigi',
+      bio: 'Programming rocks',
+    }],
   });
 });
 

@@ -8,6 +8,11 @@
 	<title>title</title>
 </head>
 <body>
-	<%= message %>
+  <% userList.forEach(user => { -%>
+    <div>
+      <div><%= user.name %></div>
+      <div><%= user.bio %></div>
+    </div>
+  <% }); -%>
 </body>
 </html>
