@@ -27,7 +27,7 @@ router.get('/signup', (req, res) => {
 });
 
 router.post('/signup', (req, res, next) => {
-  const username = req.body.username;
+  const username = req.body.username.trim();
   const password = req.body.password;
 
   User.findOne({ username }, (err, user) => {
@@ -82,7 +82,7 @@ router.get('/edit', ensureAuthenticated, (req, res) => {
 });
 
 router.post('/edit', ensureAuthenticated, (req, res, next) => {
-  req.user.displayname = req.body.displayname;
+  req.user.displayname = req.body.displayname.trim();
   req.user.bio = req.body.bio;
   req.user.save((err) => {
     if (err) return next(err);
