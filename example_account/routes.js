@@ -6,7 +6,8 @@ const User = require('./models/user');
 const router = express.Router();
 
 router.use((req, res, next) => {
-  res.locals.currentUser = req.user;
+  res.locals.currentUser = req.user || null;
+  res.locals.successes = req.flash('success');
   res.locals.errors = req.flash('error');
   res.locals.infos = req.flash('info');
   next();
@@ -18,7 +19,6 @@ router.get('/', (req, res, next) => {
     .exec((err, users) => {
       if (err) return next(err);
       res.render('index', { users });
-      // res.json(users);
     });
 });
 
@@ -39,6 +39,7 @@ router.post('/signup', (req, res, next) => {
     const newUser = new User({ username, password });
     newUser.save(next);
   });
+  //log in if sign up successfully
 }, passport.authenticate('login', {
   successRedirect: '/',
   failureRedirect: '/signup',

@@ -28,16 +28,21 @@
         <% } %>
       </ul>
     </div>
-    <div class="containter">
-      <% errors.forEach(error => { %>
-        <div class="alert alert-danger" role="alert">
-          <%= error %>
-        </div>
-      <% }) %>
-      <% infos.forEach(info => { %>
-        <div class="alert alert-info" role="alert">
-          <%= info %>
-        </div>
-      <% }) %>
-    </div>
+  </div>
+  <div class="containter">
+    <% errors.forEach(error => { %>
+      <div class="alert alert-danger" role="alert">
+        <%= error %>
+      </div>
+    <% }) %>
+    <% infos.forEach(info => { %>
+      <div class="alert alert-info" role="alert">
+        <%= info %>
+      </div>
+    <% }) %>
+    <% successes.forEach(success => { %>
+      <div class="alert alert-success" role="alert">
+        <%= success %>
+      </div>
+    <% }) %>
   </div>
