@@ -53,4 +53,15 @@ router.get('/users/:username', (req, res, next) => {
   });
 });
 
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+
+router.post('/login', passport.authenticate('login', {
+  successRedirect: '/',
+  successFlash: true,
+  failureRedirect: '/login',
+  failureFlash: true,
+}));
+
 module.exports = router;
