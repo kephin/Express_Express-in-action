@@ -70,4 +70,24 @@ router.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
+const ensureAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) return next();
+  req.flash('info', 'You must be logged in to see this page!');
+  res.redirect('/login');
+};
+
+router.get('/edit', ensureAuthenticated, (req, res) => {
+  res.render('edit');
+});
+
+router.post('/edit', ensureAuthenticated, (req, res, next) => {
+  req.user.displayname = req.body.displayname;
+  req.user.bio = req.body.bio;
+  req.user.save((err) => {
+    if (err) return next(err);
+    req.flash('info', 'Profile updated!');
+    res.redirect('/edit');
+  });
+});
+
 module.exports = router;
