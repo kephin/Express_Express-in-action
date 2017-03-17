@@ -21,21 +21,28 @@ const UserSchema = mongoose.Schema({
   bio: String,
 });
 
-UserSchema.methods.name = () => this.displayname || this.username;
+UserSchema.methods.name = function () {
+  return this.displayName || this.username;
+};
 
-UserSchema.pre = ('save', (next) => {
+UserSchema.pre('save', function (next) {
   const user = this;
-  if (!user.isModified('password')) {
-    next();
-  } else {
-    bcrypt.hash(user.password, SALT_FACTOR)
-      .then(hash => {
-        user.password = hash;
-        next();
-      })
-      .catch(err => next(err));
-  }
+  if (!user.isModified('password')) return next();
+
+  bcrypt.hash(user.password, SALT_FACTOR)
+    .then(hash => {
+      user.password = hash;
+      next();
+    })
+    .catch(err => next(err));
 });
+
+UserSchema.methods.checkPassword = function (guess, next) {
+  const user = this;
+  bcrypt.compare(guess, user.password, (err, isMatch) => {
+    next(err, isMatch);
+  });
+};
 
 const User = mongoose.model('User', UserSchema);
 module.exports = User;
